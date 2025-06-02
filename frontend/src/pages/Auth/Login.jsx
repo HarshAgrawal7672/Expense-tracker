@@ -3,12 +3,17 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../../components/Inputs/Input'
 import { validateEmail, validatePassword } from '../../utils/helper'
+import axiosInstance from '../../utils/axiosInstance'
+import { API_PATHS } from '../../utils/apiPaths'
+import { UserContext } from '../../context/userContext'
 
 function Login() {
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [error, setError] = React.useState(null)
+
+  const {  user, updateUser } = React.useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -35,7 +40,25 @@ function Login() {
 
     setError(null)
     //login api call
-
+    try{
+      const response= await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+        email,
+        password
+      })
+      const {token,user}= response.data
+      if(token){
+        localStorage.setItem('token', token)
+        updateUser(user) // Update user context with the logged-in user data
+        navigate('/dashboard')
+      }
+      // Redirect to dashboard or home page
+    }catch(error){
+      if (error.response && error.response.data) {
+        setError(error.response.data.message )
+      }else{
+        setError('An unexpected error occurred. Please try again later.')
+      }
+    }
   }
   return (
     <AuthLayout>
