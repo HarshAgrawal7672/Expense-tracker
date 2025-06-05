@@ -15,11 +15,15 @@ router.post("/login", loginUser);
 router.get("/getuser",protect, getUserInfo);
 
 router.post("/upload-image",upload.single("image"), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: "No file uploaded" });
-    }
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-    res.status(200).json({ imageUrl });
+    try {
+    return res.json({
+      message: "Upload successful",
+      imageUrl: req.file.path, // Cloudinary URL
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Upload failed" });
+  }
 });
 
 module.exports = router;

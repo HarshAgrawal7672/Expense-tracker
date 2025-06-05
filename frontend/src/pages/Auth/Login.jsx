@@ -46,6 +46,7 @@ function Login() {
         password
       })
       const {token,user}= response.data
+      console.log('Login response:', response.data)
       if(token){
         localStorage.setItem('token', token)
         updateUser(user) // Update user context with the logged-in user data

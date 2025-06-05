@@ -16,6 +16,8 @@ export const UserContext = createContext();
         localStorage.removeItem('token'); // Clear token from local storage
     };
 
+    
+
 
     return (
         <UserContext.Provider value={{ user, updateUser, clearUser }}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import{ BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom'
 import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
@@ -9,7 +9,7 @@ import UserProvider from './context/userContext'
 
 
 function App() {
-
+ 
   return (
     <UserProvider>
       <div>
@@ -32,10 +32,17 @@ function App() {
 
 export default App
 
-
 const Root = () => {
-  //check if token is present in local storage
-  const isAuthenticated = !!localStorage.getItem('token')
-  // if token is present, redirect to dashboard,otherwise redirect to login
-  return isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
-}
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+    setLoading(false);
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
+  return isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />;
+};
