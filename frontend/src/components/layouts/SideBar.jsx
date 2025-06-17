@@ -1,6 +1,6 @@
 import React from 'react'
 import { SIDE_BAR_MENU } from '../../utils/data'
-import { UserContext } from '../../context/userContext'
+import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 import blank_profile from "../../assets/images/blank_profile.jpg"
