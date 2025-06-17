@@ -7,6 +7,7 @@ import axiosInstance from '../../utils/axiosInstance'
 import { API_PATHS } from '../../utils/apiPaths'
 import { UserContext } from '../../context/userContext'
 
+
 function Login() {
 
   const [email, setEmail] = React.useState('')
