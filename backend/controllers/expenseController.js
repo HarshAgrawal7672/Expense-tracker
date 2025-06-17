@@ -17,7 +17,7 @@ exports.addExpense = async (req, res) => {
             icon,
             category,
             amount,
-            date: new Date(date) // Ensure date is stored as a Date object
+            date: new Date(date.now()) // Ensure date is stored as a Date object
         });
 
         await newExpense.save();

@@ -13,6 +13,7 @@ const TransactionInfoCard = ({
   amount,
   type,
   hideDeleteBtn,
+  onDelete
 }) => {
   return (
     <div className=" group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60">
@@ -50,7 +51,7 @@ const TransactionInfoCard = ({
                 <span className="text-sm font-semibold">
                     ${amount}
                 </span>
-                {type === "income" ? (
+                {type == "income" ? (
                   <LuTrendingUp className="text-green-500" />
                 ) : (
                   <LuTrendingDown className="text-red-500" />
