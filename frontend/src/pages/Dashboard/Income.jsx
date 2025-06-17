@@ -103,12 +103,30 @@ const Income = () => {
   //handle downlaod income details
 
   const handleDownloadIncomeDetails =async () =>{
-
     try {
-      await axiosInstance.get
-      
+      const response = await axiosInstance.get(
+        API_PATHS.INCOME.DOWNLOAD_INCOME_EXCEL,
+        {
+          responseType: "blob",
+        }
+      );
+
+      // create  a url for the blob
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Income_details.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
     } catch (error) {
-      
+      console.error(
+        "error downlaoding the file",
+        error.message || error.response?.data.message
+      );
+      toast.error("Failed to download the file")
     }
     
   }

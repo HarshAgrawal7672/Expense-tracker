@@ -7,7 +7,6 @@ import blank_profile from "../../assets/images/blank_profile.jpg"
 
 const SideBar = ({activeMenu}) => {
     const {user, clearUser} = React.useContext(UserContext)
-    console.log("user", user);
     const navigate = useNavigate()
 
     const handleclick=(route)=>{

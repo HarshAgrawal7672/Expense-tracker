@@ -17,7 +17,7 @@ exports.addExpense = async (req, res) => {
             icon,
             category,
             amount,
-            date: new Date(date.now()) // Ensure date is stored as a Date object
+            date: new Date(date) // Ensure date is stored as a Date object
         });
 
         await newExpense.save();
@@ -76,7 +76,6 @@ exports.downloadExpenseExcel = async (req, res) => {
             Category: expense.category,
             Amount: expense.amount,
             Date: expense.date.toISOString().split('T')[0], // Format date as YYYY-MM-DD
-            Icon: expense.icon || 'N/A'
         }));
 
         const worksheet = xlsx.utils.json_to_sheet(excelData);

@@ -76,7 +76,6 @@ exports.downloadIncomeExcel = async (req, res) => {
             Source: income.source,
             Amount: income.amount,
             Date: income.date.toISOString().split('T')[0], // Format date as YYYY-MM-DD
-            Icon: income.icon || 'N/A'
         }));
 
         const worksheet = xlsx.utils.json_to_sheet(excelData);
