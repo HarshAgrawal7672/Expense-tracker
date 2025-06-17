@@ -7,7 +7,7 @@ import Income from "./pages/Dashboard/Income"
 import Expense from "./pages/Dashboard/Expense"
 
 import {Toaster} from "react-hot-toast"
-import UserProvider from './context/UserContext'
+import UserProvider from './context/userContext'
 
 
 function App() {
